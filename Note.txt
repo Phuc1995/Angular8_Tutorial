@@ -1,0 +1,119 @@
+Intall:
+	- npm install -g @angular/cli
+	- ng version
+	- ng new ponyracer --routing --style=scss.
+	- 
+	
+C:\Windows\System32\wbem\
+
+- Create new component: ng g c test
+
+Interpolation:
+	- {{greetUser()}}
+	- {{"a " + name}}
+	
+Property Binding: 
+	- Attributes - HTML(can't not change once they are initialized)
+	- Properties - DOM
+	- <input [disabled]="true" id="{{id}}" type="text" value="Phuc">
+	
+Class Binding:
+	- <h2 [ngClass]="messageClasses">Test</h2>
+
+Style Binding:
+	- <h2 [style.color]="'red'">Style Binding</h2>
+	- <h2 [style.color]="hasError ? 'red' : 'green'">Style Binding</h2>
+	- <h2 [ngStyle]="titleStyles">ng Style Binding</h2>
+
+Template Reference Variables:
+	- <input #myInput type=text>
+    - <button (click)="logMessage(myInput.value)">Log </button>
+	
+Two Way Binding:
+	- import { FormsModule } from '@angular/forms'; (app.module.ts) --> imports: [FormsModule}
+	- <input [(ngModel)]="name" type=text>
+	
+ngIf Directive:
+	- ngIf: <h2 *ngIf="false">
+	-     <h2 *ngIf="true;then thenBlock; else elseBlock">
+			welcome {{name}}
+		  </h2>
+
+		<ng-template #thenBlock>
+			Code
+		</ng-template>
+
+		<ng-template #elseBlock>
+		  name is hidlen
+		</ng-template>
+
+ngSwitch Directive:
+	- <div [ngSwitch]="color">abc
+			<div *ngSwitchCase="'red'">You picked red color</div>
+			<div *ngSwitchCase="'blue'">You picked blue color</div>
+			<div *ngSwitchCase="'green'">You picked green color</div>
+			<div *ngSwitchDefault>Pick again</div>
+     </div>
+	 
+Component Interaction: 
+	- Parent component to child component: 
+		+ firt : <app-components-misc [parentData]="name"></app-components-misc> (app.component.html)
+		+ then : @Input('parentData') public name; (child.component.ts)
+	- Child component to parent component: 
+		+ Firt;  @Output() public childEvent = new EventEmitter(); (child.component.ts)
+			<button (click)=fireEvent()>Sent Event</button>
+			fireEvent(){this.childEvent.emit("hey"); }
+		+ Second: <app-components-misc (childEvent)="message=$event" [parentData]="name"></app-components-misc> (app.component.html)
+		+ Third: public message = ""; (app.component.ts)
+		+ Lastly: {{message}} (app.component.html)
+		
+Pipes; 
+	- <h2>{{name | slice:2:3}}</h2>
+	- <h2>{{person | json}}</h2>
+	- <h2>{{name | lowercase}}</h2>
+	- <h2>{{0.25 | percent}}</h2>
+	- <h2>{{250000 | currency:'VND'}}</h2>
+	- Time:
+		+ public date = new Date();
+		+ <h2>{{date}}</h2>
+		+ <h2>{{date | date:'short'}}</h2>
+		+ <h2>{{date | date:'shortDate'}}</h2>
+		+ <h2>{{date | date:'shortTime'}}</h2>
+	
+Services: 
+	- ng g s employee
+
+Using a Service:
+	- Hierarchical DI 
+	- add providers: [EmloyeeService] (app.module.ts)
+	- constructor(private _employeeService: EmloyeeService) { } (employee-list.compinent.ts)
+	
+HTTP and Observables
+	1. HTTP Get request from EmpService
+	2. Receive the observable and cast it into an employee array
+	3. Subscribe to the observable from EmpList and EmpDetail
+	4. Assign this employee array to a local variable
+	- imports: [HttpClientModule] (app.module.ts)
+	- create _url "/assets/data/employees.json";
+	- create Iterface in employee.ts
+	- getEmployees(): Observable<IEmployee[]>{ return this.http.get<IEmployee[]>(this._url);
+	- this._employeeService.getEmployees().subscribe(data => this.employees = data); (employee-*.component.ts)
+		
+		
+HTTP Error Handling:
+
+Routing and Navigation:
+	- 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
